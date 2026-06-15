@@ -1,0 +1,90 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WindowsFormsApp2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{87E532CC-3E67-4E6C-AC95-584653A4CD64}|WindowsFormsApp2\\WindowsFormsApp2.csproj|C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WindowsFormsApp2\\windowsformsapp2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87E532CC-3E67-4E6C-AC95-584653A4CD64}|WindowsFormsApp2\\WindowsFormsApp2.csproj|solutionrelative:windowsformsapp2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87E532CC-3E67-4E6C-AC95-584653A4CD64}|WindowsFormsApp2\\WindowsFormsApp2.csproj|c:\\users\\user\\desktop\\\u0441\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u043F\u0437_5\\crudapp\\windowsformsapp2\\windowsformsapp2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{87E532CC-3E67-4E6C-AC95-584653A4CD64}|WindowsFormsApp2\\WindowsFormsApp2.csproj|solutionrelative:windowsformsapp2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87E532CC-3E67-4E6C-AC95-584653A4CD64}|WindowsFormsApp2\\WindowsFormsApp2.csproj|C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WindowsFormsApp2\\windowsformsapp2\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87E532CC-3E67-4E6C-AC95-584653A4CD64}|WindowsFormsApp2\\WindowsFormsApp2.csproj|solutionrelative:windowsformsapp2\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87E532CC-3E67-4E6C-AC95-584653A4CD64}|WindowsFormsApp2\\WindowsFormsApp2.csproj|C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WindowsFormsApp2\\windowsformsapp2\\form1.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "RelativeMoniker": "D:0:0:{87E532CC-3E67-4E6C-AC95-584653A4CD64}|WindowsFormsApp2\\WindowsFormsApp2.csproj|solutionrelative:windowsformsapp2\\form1.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WindowsFormsApp2\\WindowsFormsApp2\\Form1.cs",
+              "RelativeDocumentMoniker": "WindowsFormsApp2\\Form1.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WindowsFormsApp2\\WindowsFormsApp2\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "WindowsFormsApp2\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T15:31:14.339Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WindowsFormsApp2\\WindowsFormsApp2\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "WindowsFormsApp2\\Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WindowsFormsApp2\\WindowsFormsApp2\\Form1.Designer.cs",
+              "RelativeToolTip": "WindowsFormsApp2\\Form1.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T15:35:52.423Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form1.resx",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WindowsFormsApp2\\WindowsFormsApp2\\Form1.resx",
+              "RelativeDocumentMoniker": "WindowsFormsApp2\\Form1.resx",
+              "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WindowsFormsApp2\\WindowsFormsApp2\\Form1.resx",
+              "RelativeToolTip": "WindowsFormsApp2\\Form1.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2026-05-04T15:35:49.315Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WindowsFormsApp2\\WindowsFormsApp2\\Form1.cs",
+              "RelativeDocumentMoniker": "WindowsFormsApp2\\Form1.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WindowsFormsApp2\\WindowsFormsApp2\\Form1.cs",
+              "RelativeToolTip": "WindowsFormsApp2\\Form1.cs",
+              "ViewState": "AgIAAFoBAAAAAAAAAAAAAHEBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T15:35:16.216Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

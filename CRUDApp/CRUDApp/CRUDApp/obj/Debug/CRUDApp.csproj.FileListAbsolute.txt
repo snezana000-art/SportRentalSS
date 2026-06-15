@@ -1,0 +1,9 @@
+C:\Users\User\Desktop\Сенченко\ПЗ_5\CRUDApp\CRUDApp\CRUDApp\obj\Debug\CRUDApp.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Сенченко\ПЗ_5\CRUDApp\CRUDApp\CRUDApp\obj\Debug\CRUDApp.Properties.Resources.resources
+C:\Users\User\Desktop\Сенченко\ПЗ_5\CRUDApp\CRUDApp\CRUDApp\obj\Debug\CRUDApp.csproj.GenerateResource.cache
+C:\Users\User\Desktop\Сенченко\ПЗ_5\CRUDApp\CRUDApp\CRUDApp\obj\Debug\CRUDApp.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Сенченко\ПЗ_5\CRUDApp\CRUDApp\CRUDApp\bin\Debug\CRUDApp.exe.config
+C:\Users\User\Desktop\Сенченко\ПЗ_5\CRUDApp\CRUDApp\CRUDApp\bin\Debug\CRUDApp.exe
+C:\Users\User\Desktop\Сенченко\ПЗ_5\CRUDApp\CRUDApp\CRUDApp\bin\Debug\CRUDApp.pdb
+C:\Users\User\Desktop\Сенченко\ПЗ_5\CRUDApp\CRUDApp\CRUDApp\obj\Debug\CRUDApp.exe
+C:\Users\User\Desktop\Сенченко\ПЗ_5\CRUDApp\CRUDApp\CRUDApp\obj\Debug\CRUDApp.pdb

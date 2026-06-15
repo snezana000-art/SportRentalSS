@@ -1,0 +1,264 @@
+﻿<Window x:Class="GradeJournal.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Электронный журнал успеваемости" 
+        Height="700" Width="950"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResizeWithGrip">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <Border Grid.Row="0" Background="#2C3E50" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Электронный журнал успеваемости" FontSize="24" FontWeight="Bold" Foreground="White"/>
+                <TextBlock Text="  |  Средний балл с весами оценок" FontSize="16" Foreground="#BDC3C7" VerticalAlignment="Bottom"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Вкладки -->
+        <TabControl Grid.Row="1">
+
+            <!-- ========== ВКЛАДКА 1: СТУДЕНТЫ ========== -->
+            <TabItem Header="Студенты">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button x:Name="btnAddStudent" Content="Добавить студента" Width="150" Margin="0,0,10,0" Padding="5" Click="btnAddStudent_Click"/>
+                        <Button x:Name="btnEditStudent" Content="Редактировать" Width="120" Margin="0,0,10,0" Padding="5" Click="btnEditStudent_Click"/>
+                        <Button x:Name="btnDeleteStudent" Content="Удалить" Width="100" Margin="0,0,10,0" Padding="5" Click="btnDeleteStudent_Click"/>
+                        <Button x:Name="btnRefreshStudents" Content="Обновить" Width="100" Padding="5" Click="btnRefreshStudents_Click"/>
+                    </StackPanel>
+
+                    <DataGrid x:Name="dgStudents" Grid.Row="1" AutoGenerateColumns="True" 
+                              SelectionMode="Single" IsReadOnly="True" Margin="0,0,0,10"/>
+
+                    <StatusBar Grid.Row="2">
+                        <StatusBarItem>
+                            <TextBlock x:Name="tbStudentCount" Text="Всего студентов: 0"/>
+                        </StatusBarItem>
+                    </StatusBar>
+                </Grid>
+            </TabItem>
+
+            <!-- ========== ВКЛАДКА 2: ПРЕДМЕТЫ ========== -->
+            <TabItem Header="Предметы">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button x:Name="btnAddSubject" Content="Добавить предмет" Width="150" Margin="0,0,10,0" Padding="5" Click="btnAddSubject_Click"/>
+                        <Button x:Name="btnDeleteSubject" Content="Удалить" Width="100" Margin="0,0,10,0" Padding="5" Click="btnDeleteSubject_Click"/>
+                        <Button x:Name="btnRefreshSubjects" Content="Обновить" Width="100" Padding="5" Click="btnRefreshSubjects_Click"/>
+                    </StackPanel>
+
+                    <DataGrid x:Name="dgSubjects" Grid.Row="1" AutoGenerateColumns="True" 
+                              SelectionMode="Single" IsReadOnly="True" Margin="0,0,0,10"/>
+
+                    <StatusBar Grid.Row="2">
+                        <StatusBarItem>
+                            <TextBlock x:Name="tbSubjectCount" Text="Всего предметов: 0"/>
+                        </StatusBarItem>
+                    </StatusBar>
+                </Grid>
+            </TabItem>
+
+            <!-- ========== ВКЛАДКА 3: ОЦЕНКИ ========== -->
+            <TabItem Header="Оценки">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="#ECF0F1" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+                        <StackPanel>
+                            <TextBlock Text="Выставление оценки" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <ComboBox x:Name="cbStudent" Grid.Column="0" DisplayMemberPath="LastName" 
+                                          SelectedValuePath="Id" Margin="0,0,10,0" Height="30"/>
+
+                                <ComboBox x:Name="cbSubject" Grid.Column="1" DisplayMemberPath="Name" 
+                                          SelectedValuePath="Id" Margin="0,0,10,0" Height="30"/>
+
+                                <ComboBox x:Name="cbGradeValue" Grid.Column="2" Margin="0,0,10,0" Height="30">
+                                    <ComboBoxItem Content="5 (Отлично)"/>
+                                    <ComboBoxItem Content="4 (Хорошо)"/>
+                                    <ComboBoxItem Content="3 (Удовлетворительно)"/>
+                                    <ComboBoxItem Content="2 (Неудовлетворительно)"/>
+                                </ComboBox>
+
+                                <ComboBox x:Name="cbWeight" Grid.Column="3" Margin="0,0,10,0" Height="30">
+                                    <ComboBoxItem Content="Вес: 1,0 (Обычная)"/>
+                                    <ComboBoxItem Content="Вес: 1,5 (Практика)"/>
+                                    <ComboBoxItem Content="Вес: 2,0 (Контрольная)"/>
+                                    <ComboBoxItem Content="Вес: 2,5 (Экзамен)"/>
+                                </ComboBox>
+
+                                <Button x:Name="btnAddGrade" Grid.Column="4" Content="Поставить оценку" 
+                                        Background="#27AE60" Foreground="White" Padding="10,5" Width="140" Click="btnAddGrade_Click"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <DataGrid x:Name="dgGrades" Grid.Row="1" AutoGenerateColumns="True" 
+                              SelectionMode="Single" IsReadOnly="True" Margin="0,10,0,0"/>
+                </Grid>
+            </TabItem>
+
+            <!-- ========== ВКЛАДКА 4: СРЕДНИЙ БАЛЛ ========== -->
+            <TabItem Header="Средний балл">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="#ECF0F1" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Выберите студента:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <ComboBox x:Name="cbStudentForAvg" Width="200" DisplayMemberPath="LastName" 
+                                      SelectedValuePath="Id" Margin="0,0,20,0"/>
+                            <Button x:Name="btnCalculateAvg" Content="Рассчитать средний балл" 
+                                    Background="#3498DB" Foreground="White" Padding="10,5" Click="btnCalculateAvg_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="1" Background="#F8F9F9" CornerRadius="8" Padding="15">
+                        <StackPanel>
+                            <TextBlock Text="Результат:" FontWeight="Bold" FontSize="18" Margin="0,0,0,15"/>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Средний балл:" FontWeight="Bold" FontSize="16"/>
+                                <TextBlock x:Name="tbAverage" Grid.Row="0" Grid.Column="1" FontSize="16" Foreground="#27AE60"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Средневзвешенный:" FontWeight="Bold" FontSize="16" Margin="0,10,0,0"/>
+                                <TextBlock x:Name="tbWeightedAverage" Grid.Row="1" Grid.Column="1" FontSize="16" Foreground="#2980B9" Margin="0,10,0,0"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Всего оценок:" FontWeight="Bold" FontSize="14" Margin="0,10,0,0"/>
+                                <TextBlock x:Name="tbGradeCount" Grid.Row="2" Grid.Column="1" FontSize="14" Margin="0,10,0,0"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- ========== ВКЛАДКА 5: СТАТИСТИКА ========== -->
+            <TabItem Header="Статистика">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Строка кнопок 1 -->
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button x:Name="btnRefreshStats" Content="Обновить статистику" 
+                                Width="150" Margin="0,0,10,0" Padding="5" Click="btnRefreshStats_Click"/>
+
+                        <Button x:Name="btnTopStudents" Content="Топ-5 студентов" 
+                                Width="130" Margin="0,0,10,0" Padding="5" Click="btnTopStudents_Click"/>
+
+                        <Button x:Name="btnSubjectStats" Content="Статистика по предметам" 
+                                Width="180" Margin="0,0,10,0" Padding="5" Click="btnSubjectStats_Click"/>
+                    </StackPanel>
+
+                    <!-- Строка кнопок 2 -->
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button x:Name="btnLowStudents" Content="Двоечники" 
+                                Width="120" Margin="0,0,10,0" Padding="5" Click="btnLowStudents_Click"/>
+
+                        <Button x:Name="btnBestPerSubject" Content="Лучший по предмету" 
+                                Width="150" Margin="0,0,10,0" Padding="5" Click="btnBestPerSubject_Click"/>
+
+                        <Button x:Name="btnMonthlyProgress" Content="Успеваемость по месяцам" 
+                                Width="180" Margin="0,0,10,0" Padding="5" Click="btnMonthlyProgress_Click"/>
+
+                        <Button x:Name="btnExportStats" Content="Экспорт в файл" 
+                                Width="130" Margin="0,0,10,0" Padding="5" Click="btnExportStats_Click"/>
+                    </StackPanel>
+
+                    <!-- Блок со статистикой -->
+                    <Border Grid.Row="2" Background="#F8F9F9" CornerRadius="8" Padding="15">
+                        <StackPanel>
+                            <TextBlock Text="Общая статистика успеваемости" FontWeight="Bold" FontSize="18" Margin="0,0,0,15"/>
+
+                            <Grid Margin="0,0,0,15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0" Background="#E8F8F5" CornerRadius="8" Padding="10" Margin="0,0,10,0">
+                                    <StackPanel>
+                                        <TextBlock Text="Средний балл по школе" FontWeight="Bold"/>
+                                        <TextBlock x:Name="tbSchoolAvg" FontSize="24" Foreground="#27AE60"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Grid.Column="1" Background="#EBF5FB" CornerRadius="8" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock Text="Лучший предмет" FontWeight="Bold"/>
+                                        <TextBlock x:Name="tbBestSubject" FontSize="16" Foreground="#2980B9"/>
+                                        <TextBlock x:Name="tbBestSubjectAvg" FontSize="12" Foreground="#7F8C8D"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+
+                            <Border Background="#FEF9E7" CornerRadius="8" Padding="10">
+                                <StackPanel>
+                                    <TextBlock Text="Отличники (средний балл больше или равно 4.5):" FontWeight="Bold"/>
+                                    <TextBlock x:Name="tbHonorsStudents" TextWrapping="Wrap"/>
+
+                                    <Line Margin="0,10,0,0" Stroke="#BDC3C7" StrokeThickness="1"/>
+
+                                    <TextBlock Text="Двоечники (средний балл меньше 3):" FontWeight="Bold" Margin="0,10,0,0"/>
+                                    <TextBlock x:Name="tbLowStudents" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <StatusBar Grid.Row="3" Margin="0,10,0,0">
+                        <StatusBarItem>
+                            <TextBlock x:Name="tbStatsStatus" Text="Готово"/>
+                        </StatusBarItem>
+                    </StatusBar>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>

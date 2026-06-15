@@ -1,0 +1,175 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|c:\\users\\user\\desktop\\\u0441\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u043F\u0437_5\\crudapp\\wpfapp1\\wpfapp1\\class3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\class3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|c:\\users\\user\\desktop\\\u0441\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u043F\u0437_5\\crudapp\\wpfapp1\\wpfapp1\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|c:\\users\\user\\desktop\\\u0441\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u043F\u0437_5\\crudapp\\wpfapp1\\wpfapp1\\class4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\class4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|c:\\users\\user\\desktop\\\u0441\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u043F\u0437_5\\crudapp\\wpfapp1\\wpfapp1\\class2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\class2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|c:\\users\\user\\desktop\\\u0441\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u043F\u0437_5\\crudapp\\wpfapp1\\wpfapp1\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|c:\\users\\user\\desktop\\\u0441\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u043F\u0437_5\\crudapp\\wpfapp1\\wpfapp1\\wpfapp1.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\wpfapp1.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|c:\\users\\user\\desktop\\\u0441\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u043F\u0437_5\\crudapp\\wpfapp1\\wpfapp1\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|c:\\users\\user\\desktop\\\u0441\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u043F\u0437_5\\crudapp\\wpfapp1\\wpfapp1\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|c:\\users\\user\\desktop\\\u0441\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u043F\u0437_5\\crudapp\\wpfapp1\\wpfapp1\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D3A3EE90-5EE6-4DD5-B20E-C8973EE3D7C5}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 100,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Class4.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\Class4.cs",
+              "RelativeDocumentMoniker": "WpfApp1\\Class4.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\Class4.cs*",
+              "RelativeToolTip": "WpfApp1\\Class4.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-23T10:53:02.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Class3.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\Class3.cs",
+              "RelativeDocumentMoniker": "WpfApp1\\Class3.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\Class3.cs*",
+              "RelativeToolTip": "WpfApp1\\Class3.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-23T10:52:14.805Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "WpfApp1",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\WpfApp1.csproj",
+              "RelativeDocumentMoniker": "WpfApp1\\WpfApp1.csproj",
+              "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\WpfApp1.csproj*",
+              "RelativeToolTip": "WpfApp1\\WpfApp1.csproj*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-23T10:51:28.572Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\App.xaml",
+              "RelativeDocumentMoniker": "WpfApp1\\App.xaml",
+              "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\App.xaml",
+              "RelativeToolTip": "WpfApp1\\App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-05-23T10:51:24.845Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\App.xaml.cs",
+              "RelativeDocumentMoniker": "WpfApp1\\App.xaml.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\App.xaml.cs",
+              "RelativeToolTip": "WpfApp1\\App.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-23T10:51:20.819Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Class2.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\Class2.cs",
+              "RelativeDocumentMoniker": "WpfApp1\\Class2.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\Class2.cs*",
+              "RelativeToolTip": "WpfApp1\\Class2.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-23T10:50:13.103Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\Class1.cs",
+              "RelativeDocumentMoniker": "WpfApp1\\Class1.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\Class1.cs*",
+              "RelativeToolTip": "WpfApp1\\Class1.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-23T10:49:44.794Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "WpfApp1\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\MainWindow.xaml",
+              "RelativeToolTip": "WpfApp1\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-05-23T10:10:37.305Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "WpfApp1\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\WpfApp1\\WpfApp1\\MainWindow.xaml.cs*",
+              "RelativeToolTip": "WpfApp1\\MainWindow.xaml.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-23T10:10:31.784Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
