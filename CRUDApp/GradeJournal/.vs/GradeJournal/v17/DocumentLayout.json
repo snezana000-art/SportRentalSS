@@ -64,8 +64,16 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 15,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 9,
@@ -228,14 +236,10 @@
               "RelativeDocumentMoniker": "GradeJournal\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\GradeJournal\\GradeJournal\\MainWindow.xaml.cs",
               "RelativeToolTip": "GradeJournal\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAAwBYAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAQwBYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-04T06:31:45.67Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }

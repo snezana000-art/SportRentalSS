@@ -64,12 +64,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 13,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 9,
@@ -104,8 +100,7 @@
               "RelativeToolTip": "GradeJournal\\LoginWindow.xaml.cs",
               "ViewState": "AgIAACoAAAAAAAAAAAAYwDUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-05T12:14:50.058Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-05T12:14:50.058Z"
             },
             {
               "$type": "Document",
@@ -153,8 +148,7 @@
               "RelativeToolTip": "GradeJournal\\RegisterWindow.xaml.cs",
               "ViewState": "AgIAAD0AAAAAAAAAAAAYwE4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-05T11:47:39.372Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-05T11:47:39.372Z"
             },
             {
               "$type": "Document",
@@ -165,8 +159,7 @@
               "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\GradeJournal\\GradeJournal\\RegisterWindow.xaml",
               "RelativeToolTip": "GradeJournal\\RegisterWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-06-05T11:46:54.095Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-05T11:46:54.095Z"
             },
             {
               "$type": "Document",
@@ -178,8 +171,7 @@
               "RelativeToolTip": "GradeJournal\\Models\\User.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAqwBwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-05T11:36:05.322Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-05T11:36:05.322Z"
             },
             {
               "$type": "Document",
@@ -203,8 +195,7 @@
               "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u0435\u043D\u0447\u0435\u043D\u043A\u043E\\\u041F\u0417_5\\CRUDApp\\GradeJournal\\GradeJournal\\App.xaml",
               "RelativeToolTip": "GradeJournal\\App.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-06-05T11:23:11.887Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-05T11:23:11.887Z"
             },
             {
               "$type": "Document",
@@ -216,8 +207,7 @@
               "RelativeToolTip": "GradeJournal\\App.xaml.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAAwBAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-05T11:09:52.126Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-05T11:09:52.126Z"
             },
             {
               "$type": "Document",
@@ -242,6 +232,14 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-04T06:31:45.67Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }
