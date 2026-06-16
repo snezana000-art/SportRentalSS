@@ -18,8 +18,8 @@ namespace GradeJournal
                 {
                     Login = "admin",
                     Password = "123",
-                    Role = "Admin",
-                    FullName = "Администратор"
+                    FullName = "Главный администратор",
+                    Role = "Admin"
                 });
 
                 db.SaveChanges();
@@ -36,7 +36,6 @@ namespace GradeJournal
             {
                 MainWindow mainWindow = new MainWindow(user);
                 mainWindow.Show();
-
                 Close();
             }
             else

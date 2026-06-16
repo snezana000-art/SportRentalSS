@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GradeJournal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8c06f861e71655278f6bac463c22e3aa7671b6cc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+395e7ec00c170c9523eb127b42dde3f29f69ac57")]
 [assembly: System.Reflection.AssemblyProductAttribute("GradeJournal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GradeJournal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

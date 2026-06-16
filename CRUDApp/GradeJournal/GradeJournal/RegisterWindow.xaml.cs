@@ -23,31 +23,25 @@ namespace GradeJournal
 
             if (string.IsNullOrWhiteSpace(fullName))
             {
-                tbError.Text = "Введите ФИО!";
+                tbError.Text = "Введите ФИО";
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(login))
             {
-                tbError.Text = "Введите логин!";
+                tbError.Text = "Введите логин";
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(password))
             {
-                tbError.Text = "Введите пароль!";
+                tbError.Text = "Введите пароль";
                 return;
             }
 
-            if (password.Length < 4)
+            if (_context.Users.Any(x => x.Login == login))
             {
-                tbError.Text = "Пароль должен быть не менее 4 символов!";
-                return;
-            }
-
-            if (_context.Users.Any(u => u.Login == login))
-            {
-                tbError.Text = "Пользователь уже существует!";
+                tbError.Text = "Такой логин уже существует";
                 return;
             }
 
@@ -65,13 +59,10 @@ namespace GradeJournal
             _context.SaveChanges();
 
             MessageBox.Show(
-                "Регистрация успешна!",
+                "Регистрация выполнена успешно!",
                 "Успех",
                 MessageBoxButton.OK,
                 MessageBoxImage.Information);
-
-            MainWindow mainWindow = new MainWindow(newUser);
-            mainWindow.Show();
 
             Close();
         }

@@ -25,28 +25,31 @@ namespace GradeJournal
         // Метод для применения прав в зависимости от роли
         private void ApplyRolePermissions()
         {
-            if (_currentUser.Role == "Admin")
+            if (_currentUser == null)
+                return;
+
+            bool isAdmin = _currentUser.Role == "Admin";
+
+            btnAddStudent.IsEnabled = isAdmin;
+            btnEditStudent.IsEnabled = isAdmin;
+            btnDeleteStudent.IsEnabled = isAdmin;
+
+            btnAddSubject.IsEnabled = isAdmin;
+            btnDeleteSubject.IsEnabled = isAdmin;
+
+            btnAddGrade.IsEnabled = isAdmin;
+
+            if (isAdmin)
             {
-                btnAddStudent.IsEnabled = true;
-                btnEditStudent.IsEnabled = true;
-                btnDeleteStudent.IsEnabled = true;
-                btnAddSubject.IsEnabled = true;
-                btnDeleteSubject.IsEnabled = true;
-                btnAddGrade.IsEnabled = true;
-                tbStatsStatus.Text = $"Добро пожаловать, {_currentUser.FullName} (Администратор)";
+                tbStatsStatus.Text =
+                    $"Вход выполнен: {_currentUser.FullName} (Администратор)";
             }
             else
             {
-                btnAddStudent.IsEnabled = false;
-                btnEditStudent.IsEnabled = false;
-                btnDeleteStudent.IsEnabled = false;
-                btnAddSubject.IsEnabled = false;
-                btnDeleteSubject.IsEnabled = false;
-                btnAddGrade.IsEnabled = false;
-                tbStatsStatus.Text = $"Добро пожаловать, {_currentUser.FullName} (Пользователь) - режим просмотра";
+                tbStatsStatus.Text =
+                    $"Вход выполнен: {_currentUser.FullName} (Пользователь - только просмотр)";
             }
         }
-
         // ==================== ЗАГРУЗКА ДАННЫХ ====================
 
         private void LoadAllData()
