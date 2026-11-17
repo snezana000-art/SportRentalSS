@@ -1,4 +1,7 @@
+using System;
+using Microsoft.EntityFrameworkCore;
 using SportRental.Components;
+using SportRental.Data;
 
 namespace SportRental
 {
@@ -12,8 +15,16 @@ namespace SportRental
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
 
+            builder.Services.AddDbContextFactory<AppDbContext>(options =>
+    options.UseSqlite("Data Source=prokat.db"));
+
             var app = builder.Build();
 
+            var factory = app.Services.GetRequiredService<IDbContextFactory<AppDbContext>>();
+            using (var db = factory.CreateDbContext())
+            {
+                DbSeeder.Seed(db);
+            }
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
