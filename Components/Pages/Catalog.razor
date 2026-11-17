@@ -1,5 +1,8 @@
 @page "/catalog"
 @inject InventoryService Inventory
+@inject BookingService Bookings
+@inject AuthService Auth
+@inject NavigationManager Nav
 
 <PageTitle>Каталог</PageTitle>
 
@@ -16,6 +19,17 @@
     </select>
 </div>
 
+@if (message != "")
+{
+    <div class="alert @(isError ? "alert-danger" : "alert-success")">
+        @message
+        @if (!isError)
+        {
+            <a href="cabinet">Перейти в личный кабинет</a>
+        }
+    </div>
+}
+
 <div class="row">
     @foreach (var item in items)
     {
@@ -26,6 +40,30 @@
                     <h5 class="card-title mt-2">@item.Name</h5>
                     <p class="card-text">@item.Description</p>
                     <p><b>@item.PricePerDay.ToString("0") ₽ в день</b></p>
+
+                    <button class="btn btn-primary" @onclick="() => OpenBooking(item)">Забронировать</button>
+
+                    @if (selected != null && selected.Id == item.Id)
+                    {
+                        <div class="border rounded p-2 mt-3">
+                            <label>С какого числа</label>
+                            <input class="form-control" type="date" @bind="startDate" />
+
+                            <label class="mt-2">По какое число</label>
+                            <input class="form-control" type="date" @bind="endDate" />
+
+                            @if (Days >= 1)
+                            {
+                                <p class="mt-2">Дней: @Days, итого: <b>@Total.ToString("0") ₽</b></p>
+                            }
+                            else
+                            {
+                                <p class="mt-2">Проверьте даты</p>
+                            }
+
+                            <button class="btn btn-success" @onclick="Book">Подтвердить бронь</button>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
@@ -41,6 +79,19 @@
     List<Category> categories = new();
     List<Equipment> items = new();
     int categoryId = 0;
+
+    Equipment? selected;
+    DateTime startDate = DateTime.Today;
+    DateTime endDate = DateTime.Today;
+
+    string message = "";
+    bool isError = false;
+
+    // количество дней аренды
+    int Days => (endDate.Date - startDate.Date).Days + 1;
+
+    // общая стоимость
+    decimal Total => selected == null ? 0 : selected.PricePerDay * Days;
 
     protected override async Task OnInitializedAsync()
     {
@@ -58,6 +109,48 @@
     async Task OnCategoryChanged(ChangeEventArgs e)
     {
         categoryId = int.Parse(e.Value?.ToString() ?? "0");
+        selected = null;
+        message = "";
         await LoadItems();
+    }
+
+    // нажали "Забронировать": показываем форму выбора дат
+    void OpenBooking(Equipment item)
+    {
+        message = "";
+
+        if (!Auth.IsLoggedIn)
+        {
+            // забронировать может только вошедший пользователь
+            Nav.NavigateTo("login");
+            return;
+        }
+
+        selected = item;
+        startDate = DateTime.Today;
+        endDate = DateTime.Today;
+    }
+
+    // нажали "Подтвердить бронь"
+    async Task Book()
+    {
+if (selected == null || Auth.CurrentUser == null)
+        {
+            return;
+        }
+
+        var error = await Bookings.CreateAsync(Auth.CurrentUser.Id, selected.Id, startDate, endDate);
+
+        if (error == null)
+        {
+            message = "Бронь создана.";
+            isError = false;
+            selected = null;
+        }
+        else
+        {
+            message = error;
+            isError = true;
+        }
     }
 }

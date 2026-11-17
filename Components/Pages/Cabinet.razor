@@ -1,0 +1,58 @@
+@page "/cabinet"
+@inject AuthService Auth
+@inject BookingService Bookings
+
+<PageTitle>Личный кабинет</PageTitle>
+
+@if (!Auth.IsLoggedIn)
+{
+    <p>Чтобы увидеть свои брони, <a href="login">войдите в аккаунт</a>.</p>
+}
+else
+{
+    <h1>Личный кабинет</h1>
+    <p>Здравствуйте, @Auth.CurrentUser!.FullName!</p>
+
+    <h2>Мои бронирования</h2>
+
+    @if (bookings.Count == 0)
+    {
+        <p>У вас пока нет бронирований. <a href="catalog">Выбрать инвентарь</a></p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Инвентарь</th>
+                    <th>Даты</th>
+                    <th>Стоимость</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var b in bookings)
+                {
+                    <tr>
+                        <td>@b.Equipment?.Name</td>
+                        <td>@b.StartDate.ToString("dd.MM.yyyy") - @b.EndDate.ToString("dd.MM.yyyy")</td>
+                        <td>@b.TotalPrice.ToString("0") ₽</td>
+                        <td>@b.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+@code {
+    List<Booking> bookings = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Auth.CurrentUser != null)
+        {
+            bookings = await Bookings.GetUserBookingsAsync(Auth.CurrentUser.Id);
+        }
+    }
+}

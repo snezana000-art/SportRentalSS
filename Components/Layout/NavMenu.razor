@@ -26,6 +26,11 @@
         @if (Auth.IsLoggedIn)
         {
             <div class="nav-item px-3">
+                <NavLink class="nav-link" href="cabinet">
+                    Личный кабинет
+                </NavLink>
+            </div>
+            <div class="nav-item px-3">
                 <span class="nav-link">@Auth.CurrentUser!.FullName</span>
             </div>
             <div class="nav-item px-3">
