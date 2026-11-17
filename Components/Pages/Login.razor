@@ -1,0 +1,58 @@
+@page "/login"
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+<PageTitle>Вход</PageTitle>
+
+<h1>Вход</h1>
+
+<div style="max-width: 400px">
+    @if (error != "")
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+    @if (message != "")
+    {
+        <div class="alert alert-success">@message</div>
+    }
+
+    <label>Email</label>
+    <input class="form-control" type="email" @bind="email" @bind:event="oninput" />
+
+    <label class="mt-2">Пароль</label>
+    <input class="form-control" type="password" @bind="password" @bind:event="oninput" @onkeydown="OnKeyDown" />
+
+    <button class="btn btn-primary mt-3" @onclick="DoLogin">Войти</button>
+</div>
+
+@code {
+    string email = "";
+    string password = "";
+    string error = "";
+    string message = "";
+
+    async Task DoLogin()
+    {
+        error = "";
+        message = "";
+
+        var result = await Auth.LoginAsync(email, password);
+
+        if (result == null)
+        {
+            message = "Вы вошли как " + Auth.CurrentUser!.FullName;
+        }
+        else
+        {
+            error = result;
+        }
+    }
+
+    async Task OnKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            await DoLogin();
+        }
+    }
+}

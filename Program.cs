@@ -1,7 +1,9 @@
 using System;
+using System.Net.NetworkInformation;
 using Microsoft.EntityFrameworkCore;
 using SportRental.Components;
 using SportRental.Data;
+using SportRental.Services;
 
 namespace SportRental
 {
@@ -17,6 +19,7 @@ namespace SportRental
 
             builder.Services.AddDbContextFactory<AppDbContext>(options =>
     options.UseSqlite("Data Source=prokat.db"));
+            builder.Services.AddScoped<AuthService>();
 
             var app = builder.Build();
 
