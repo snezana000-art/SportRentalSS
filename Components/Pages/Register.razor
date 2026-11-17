@@ -11,10 +11,6 @@
     {
         <div class="alert alert-danger">@error</div>
     }
-    @if (message != "")
-    {
-        <div class="alert alert-success">@message</div>
-    }
 
     <label>Имя</label>
     <input class="form-control" type="text" @bind="name" @bind:event="oninput" />
@@ -37,12 +33,10 @@
     string password = "";
     string password2 = "";
     string error = "";
-    string message = "";
 
     async Task DoRegister()
     {
         error = "";
-        message = "";
 
         if (password != password2)
         {
@@ -54,7 +48,8 @@
 
         if (result == null)
         {
-            message = "Вы зарегистрированы, добро пожаловать, " + Auth.CurrentUser!.FullName + "!";
+            // регистрация прошла, переходим на главную страницу
+            Nav.NavigateTo("/");
         }
         else
         {
