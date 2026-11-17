@@ -1,0 +1,63 @@
+@page "/catalog"
+@inject InventoryService Inventory
+
+<PageTitle>Каталог</PageTitle>
+
+<h1>Каталог инвентаря</h1>
+
+<div class="mb-3" style="max-width: 300px">
+    <label>Категория</label>
+    <select class="form-select" @onchange="OnCategoryChanged">
+        <option value="0">Все категории</option>
+        @foreach (var c in categories)
+        {
+            <option value="@c.Id">@c.Name</option>
+        }
+    </select>
+</div>
+
+<div class="row">
+    @foreach (var item in items)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <span class="badge bg-secondary">@item.Category?.Name</span>
+                    <h5 class="card-title mt-2">@item.Name</h5>
+                    <p class="card-text">@item.Description</p>
+                    <p><b>@item.PricePerDay.ToString("0") ₽ в день</b></p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (items.Count == 0)
+{
+    <p>В этой категории пока ничего нет.</p>
+}
+
+@code {
+    List<Category> categories = new();
+    List<Equipment> items = new();
+    int categoryId = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        categories = await Inventory.GetCategoriesAsync();
+        await LoadItems();
+    }
+
+    // загружает инвентарь выбранной категории (0 - все категории)
+    async Task LoadItems()
+    {
+        items = await Inventory.GetEquipmentAsync(categoryId == 0 ? null : categoryId);
+    }
+
+    // срабатывает, когда пользователь выбрал другую категорию
+    async Task OnCategoryChanged(ChangeEventArgs e)
+    {
+        categoryId = int.Parse(e.Value?.ToString() ?? "0");
+        await LoadItems();
+    }
+}

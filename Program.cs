@@ -20,6 +20,7 @@ namespace SportRental
             builder.Services.AddDbContextFactory<AppDbContext>(options =>
     options.UseSqlite("Data Source=prokat.db"));
             builder.Services.AddScoped<AuthService>();
+            builder.Services.AddScoped<InventoryService>();
 
             var app = builder.Build();
 
