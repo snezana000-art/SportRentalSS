@@ -1,5 +1,5 @@
 @page "/register"
-@inject AuthService Auth
+@inject RentalFacade Facade
 @inject NavigationManager Nav
 
 <PageTitle>Регистрация</PageTitle>
@@ -44,11 +44,10 @@
             return;
         }
 
-        var result = await Auth.RegisterAsync(name, email, password);
+        var result = await Facade.RegisterAsync(name, email, password);
 
         if (result == null)
         {
-            // регистрация прошла, переходим на главную страницу
             Nav.NavigateTo("/");
         }
         else

@@ -1,17 +1,16 @@
 @page "/cabinet"
-@inject AuthService Auth
-@inject BookingService Bookings
+@inject RentalFacade Facade
 
 <PageTitle>Личный кабинет</PageTitle>
 
-@if (!Auth.IsLoggedIn)
+@if (!Facade.IsLoggedIn)
 {
     <p>Чтобы увидеть свои брони, <a href="login">войдите в аккаунт</a>.</p>
 }
 else
 {
     <h1>Личный кабинет</h1>
-    <p>Здравствуйте, @Auth.CurrentUser!.FullName!</p>
+    <p>Здравствуйте, @Facade.UserName!</p>
 
     @if (message != "")
     {
@@ -101,48 +100,28 @@ else
         await LoadBookings();
     }
 
-    // загружает брони клиента и делит их на текущие и прошлые
     async Task LoadBookings()
     {
-        if (Auth.CurrentUser == null)
-        {
-            return;
-        }
-
-        var all = await Bookings.GetUserBookingsAsync(Auth.CurrentUser.Id);
+        var all = await Facade.GetMyBookingsAsync();
 
         current = all.Where(b => b.Status == BookingStatus.New || b.Status == BookingStatus.Confirmed).ToList();
         past = all.Where(b => b.Status == BookingStatus.Returned || b.Status == BookingStatus.Cancelled).ToList();
     }
 
-    // нажали "Отменить"
     async Task Cancel(int id)
     {
-        if (Auth.CurrentUser == null)
-        {
-            return;
-        }
-
-        var error = await Bookings.CancelAsync(id, Auth.CurrentUser.Id);
+        var error = await Facade.CancelBookingAsync(id);
         ShowResult(error, "Бронь отменена. Если это ошибка, её можно вернуть в списке прошлых броней.");
         await LoadBookings();
     }
 
-    // нажали "Вернуть бронь"
     async Task Undo(int id)
     {
-        if (Auth.CurrentUser == null)
-        {
-            return;
-        }
-
-        var error = await Bookings.UndoAsync(id, Auth.CurrentUser.Id);
+        var error = await Facade.UndoCancelAsync(id);
         ShowResult(error, "Бронь возвращена.");
-    
-await LoadBookings();
+        await LoadBookings();
     }
 
-    // показывает сообщение об успехе или ошибке
     void ShowResult(string? error, string okText)
     {
         if (error == null)

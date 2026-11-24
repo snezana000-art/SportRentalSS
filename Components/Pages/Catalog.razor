@@ -1,7 +1,5 @@
 @page "/catalog"
-@inject InventoryService Inventory
-@inject BookingService Bookings
-@inject AuthService Auth
+@inject RentalFacade Facade
 @inject NavigationManager Nav
 
 <PageTitle>Каталог</PageTitle>
@@ -87,25 +85,21 @@
     string message = "";
     bool isError = false;
 
-    // количество дней аренды
     int Days => (endDate.Date - startDate.Date).Days + 1;
 
-    // общая стоимость
     decimal Total => selected == null ? 0 : selected.PricePerDay * Days;
 
     protected override async Task OnInitializedAsync()
     {
-        categories = await Inventory.GetCategoriesAsync();
+        categories = await Facade.GetCategoriesAsync();
         await LoadItems();
     }
 
-    // загружает инвентарь выбранной категории (0 - все категории)
     async Task LoadItems()
     {
-        items = await Inventory.GetEquipmentAsync(categoryId == 0 ? null : categoryId);
+        items = await Facade.GetEquipmentAsync(categoryId == 0 ? null : categoryId);
     }
 
-    // срабатывает, когда пользователь выбрал другую категорию
     async Task OnCategoryChanged(ChangeEventArgs e)
     {
         categoryId = int.Parse(e.Value?.ToString() ?? "0");
@@ -113,15 +107,12 @@
         message = "";
         await LoadItems();
     }
-
-    // нажали "Забронировать": показываем форму выбора дат
     void OpenBooking(Equipment item)
     {
         message = "";
 
-        if (!Auth.IsLoggedIn)
+        if (!Facade.IsLoggedIn)
         {
-            // забронировать может только вошедший пользователь
             Nav.NavigateTo("login");
             return;
         }
@@ -131,15 +122,13 @@
         endDate = DateTime.Today;
     }
 
-    // нажали "Подтвердить бронь"
     async Task Book()
     {
-if (selected == null || Auth.CurrentUser == null)
+        if (selected == null)
         {
             return;
         }
-
-        var error = await Bookings.CreateAsync(Auth.CurrentUser.Id, selected.Id, startDate, endDate);
+var error = await Facade.BookAsync(selected.Id, startDate, endDate);
 
         if (error == null)
         {

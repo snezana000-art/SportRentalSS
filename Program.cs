@@ -23,6 +23,7 @@ namespace SportRental
             builder.Services.AddScoped<InventoryService>();
             builder.Services.AddScoped<BookingService>();
             builder.Services.AddScoped<BookingCaretaker>();
+            builder.Services.AddScoped<RentalFacade>();
 
             var app = builder.Build();
 
