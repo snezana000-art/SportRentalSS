@@ -4,37 +4,23 @@ using SportRental.Models;
 
 namespace SportRental.Services;
 
-/// <summary>
-/// получение категорий и списка инвентаря.
-/// </summary>
+// Работа с каталогом инвентаря
 public class InventoryService
 {
     private readonly IDbContextFactory<AppDbContext> _factory;
 
-    /// <summary>
-    /// создаёт сервис каталога.
-    /// </summary>
-    /// <param name="factory">фабрика для создания подключений к базе данных.</param>
     public InventoryService(IDbContextFactory<AppDbContext> factory)
     {
         _factory = factory;
     }
 
-    /// <summary>
-    /// возвращает все категории, отсортированные по названию.
-    /// </summary>
-    /// <returns>список категорий.</returns>
     public async Task<List<Category>> GetCategoriesAsync()
     {
         using var db = _factory.CreateDbContext();
         return await db.Categories.OrderBy(c => c.Name).ToListAsync();
     }
 
-    /// <summary>
-    /// возвращает инвентарь, при необходимости только из одной категории.
-    /// </summary>
-    /// <param name="categoryId">номер категории. Если нул, возвращается весь инвентарь.</param>
-    /// <returns>список инвентаря вместе с названием категории.</returns>
+    // categoryId = null - показать весь инвентарь
     public async Task<List<Equipment>> GetEquipmentAsync(int? categoryId)
     {
         using var db = _factory.CreateDbContext();
@@ -46,5 +32,77 @@ public class InventoryService
         }
 
         return await query.OrderBy(e => e.Name).ToListAsync();
+    }
+
+    // Проверка полей инвентаря. Возвращает текст ошибки или null.
+    private string? Validate(string name, decimal price)
+    {
+        if (name.Trim() == "")
+            return "Введите название";
+        if (price <= 0)
+            return "Цена должна быть больше нуля";
+        return null;
+    }
+
+    public async Task<string?> AddAsync(string name, string description, decimal price, int categoryId)
+    {
+        var error = Validate(name, price);
+        if (error != null)
+            return error;
+
+        using var db = _factory.CreateDbContext();
+
+        if (!await db.Categories.AnyAsync(c => c.Id == categoryId))
+            return "Выберите категорию";
+
+        db.Inventory.Add(new Equipment
+        {
+            Name = name.Trim(),
+            Description = description.Trim(),
+            PricePerDay = price,
+            CategoryId = categoryId
+        });
+        await db.SaveChangesAsync();
+        return null;
+    }
+
+    public async Task<string?> UpdateAsync(int id, string name, string description, decimal price, int categoryId)
+    {
+        var error = Validate(name, price);
+        if (error != null)
+            return error;
+
+        using var db = _factory.CreateDbContext();
+
+        var item = await db.Inventory.FindAsync(id);
+        if (item == null)
+            return "Инвентарь не найден";
+
+        if (!await db.Categories.AnyAsync(c => c.Id == categoryId))
+            return "Выберите категорию";
+
+        item.Name = name.Trim();
+        item.Description = description.Trim();
+        item.PricePerDay = price;
+        item.CategoryId = categoryId;
+
+        await db.SaveChangesAsync();
+        return null;
+    }
+
+    public async Task<string?> DeleteAsync(int id)
+    {
+        using var db = _factory.CreateDbContext();
+
+        if (await db.Bookings.AnyAsync(b => b.EquipmentId == id))
+            return "Нельзя удалить: на этот инвентарь есть бронирования";
+
+        var item = await db.Inventory.FindAsync(id);
+        if (item == null)
+            return "Инвентарь не найден";
+
+        db.Inventory.Remove(item);
+        await db.SaveChangesAsync();
+        return null;
     }
 }

@@ -4,33 +4,20 @@ using SportRental.Models;
 
 namespace SportRental.Services;
 
-/// <summary>
-/// Логика бронирования: проверка занятости дат, создание, отмена и возврат брони.
-/// </summary>
+// Вся логика бронирования: проверка дат, создание, отмена, возврат
 public class BookingService
 {
     private readonly IDbContextFactory<AppDbContext> _factory;
     private readonly BookingCaretaker _caretaker;
 
-    /// <summary>
-    /// Создаёт сервис бронирования.
-    /// </summary>
-    /// <param name="factory">Фабрика для создания подключений к базе данных.</param>
-    /// <param name="caretaker">Опекун, который хранит снимки броней.</param>
     public BookingService(IDbContextFactory<AppDbContext> factory, BookingCaretaker caretaker)
     {
         _factory = factory;
         _caretaker = caretaker;
     }
 
-    /// <summary>
-    /// Проверяет, свободен ли инвентарь на выбранные даты.
-    /// </summary>
-    /// <param name="equipmentId">Номер инвентаря.</param>
-    /// <param name="start">Дата начала аренды.</param>
-    /// <param name="end">Дата окончания аренды.</param>
-    /// <param name="ignoreBookingId">Бронь, которую не учитываем (0 - учитывать все).</param>
-    /// <returns>true, если инвентарь свободен на все эти даты.</returns>
+    // Свободен ли инвентарь на эти даты?
+    // ignoreBookingId - бронь, которую не учитываем (нужно при восстановлении брони)
     public async Task<bool> IsAvailableAsync(int equipmentId, DateTime start, DateTime end, int ignoreBookingId = 0)
     {
         using var db = _factory.CreateDbContext();
@@ -46,14 +33,7 @@ public class BookingService
         return !busy;
     }
 
-    /// <summary>
-    /// Создаёт новую бронь после проверки дат.
-    /// </summary>
-    /// <param name="userId">Номер клиента.</param>
-    /// <param name="equipmentId">Номер инвентаря.</param>
-    /// <param name="start">Дата начала аренды.</param>
-    /// <param name="end">Дата окончания аренды.</param>
-    /// <returns>Текст ошибки или null, если бронь создана.</returns>
+    // Создать бронь. Возвращает текст ошибки или null.
     public async Task<string?> CreateAsync(int userId, int equipmentId, DateTime start, DateTime end)
     {
         start = start.Date;
@@ -88,11 +68,6 @@ public class BookingService
         return null;
     }
 
-    /// <summary>
-    /// Возвращает все брони клиента, новые сверху.
-    /// </summary>
-    /// <param name="userId">Номер клиента.</param>
-    /// <returns>Список броней вместе с названием инвентаря.</returns>
     public async Task<List<Booking>> GetUserBookingsAsync(int userId)
     {
         using var db = _factory.CreateDbContext();
@@ -103,13 +78,17 @@ public class BookingService
             .ToListAsync();
     }
 
-    /// <summary>
-    /// Отменяет бронь клиента. Перед отменой сохраняется снимок брони.
-    /// </summary>
-    /// <param name="bookingId">Номер брони.</param>
+    public async Task<List<Booking>> GetAllAsync()
+    {
+        using var db = _factory.CreateDbContext();
+        return await db.Bookings
+            .Include(b => b.Equipment)
+            .Include(b => b.User)
+            .OrderByDescending(b => b.Id)
+            .ToListAsync();
+    }
 
-/// <param name="userId">Номер клиента (отменить можно только свою бронь).</param>
-    /// <returns>Текст ошибки или null, если бронь отменена.</returns>
+    // Отмена брони клиентом
     public async Task<string?> CancelAsync(int bookingId, int userId)
     {
         using var db = _factory.CreateDbContext();
@@ -120,18 +99,13 @@ public class BookingService
         if (booking.Status != BookingStatus.New && booking.Status != BookingStatus.Confirmed)
             return "Эту бронь уже нельзя отменить";
 
-        _caretaker.Save(db, booking);               // сначала сохраняем снимок
-        booking.Status = BookingStatus.Cancelled;   // потом меняем бронь
+        _caretaker.Save(db, booking);          // сначала сохраняем снимок
+        booking.Status = BookingStatus.Cancelled;
         await db.SaveChangesAsync();
         return null;
     }
 
-    /// <summary>
-    /// Возвращает отменённую бронь в прежнее состояние (Undo).
-    /// </summary>
-    /// <param name="bookingId">Номер брони.</param>
-    /// <param name="userId">Номер клиента.</param>
-    /// <returns>Текст ошибки или null, если бронь возвращена.</returns>
+    // Вернуть отменённую бронь (Undo)
     public async Task<string?> UndoAsync(int bookingId, int userId)
     {
         using var db = _factory.CreateDbContext();
@@ -141,7 +115,8 @@ public class BookingService
             return "Бронь не найдена";
 
         var snapshot = _caretaker.GetLast(db, bookingId);
-        if (snapshot == null)
+        
+if (snapshot == null)
             return "Нечего возвращать";
 
         // пока бронь была отменена, эти даты мог занять кто-то другой
@@ -149,6 +124,34 @@ public class BookingService
             return "Нельзя вернуть бронь: эти даты уже заняты";
 
         _caretaker.Undo(db, booking, snapshot);
+        await db.SaveChangesAsync();
+        return null;
+    }
+
+    // Администратор подтверждает бронь
+    public Task<string?> ConfirmAsync(int bookingId)
+    {
+        return ChangeStatusAsync(bookingId, BookingStatus.New, BookingStatus.Confirmed);
+    }
+
+    // Администратор отмечает возврат инвентаря
+    public Task<string?> ReturnAsync(int bookingId)
+    {
+        return ChangeStatusAsync(bookingId, BookingStatus.Confirmed, BookingStatus.Returned);
+    }
+
+    private async Task<string?> ChangeStatusAsync(int bookingId, string from, string to)
+    {
+        using var db = _factory.CreateDbContext();
+
+        var booking = await db.Bookings.FindAsync(bookingId);
+        if (booking == null)
+            return "Бронь не найдена";
+        if (booking.Status != from)
+            return "Статус брони уже изменился, обновите страницу";
+
+        _caretaker.Save(db, booking);
+        booking.Status = to;
         await db.SaveChangesAsync();
         return null;
     }

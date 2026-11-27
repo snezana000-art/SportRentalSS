@@ -30,6 +30,16 @@
                     Личный кабинет
                 </NavLink>
             </div>
+
+            @if (Facade.IsAdmin)
+            {
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="admin">
+                        Админ-панель
+                    </NavLink>
+                </div>
+            }
+
             <div class="nav-item px-3">
                 <span class="nav-link">@Facade.UserName</span>
             </div>
@@ -62,7 +72,6 @@
 @code {
     protected override void OnInitialized()
     {
-        // когда кто-то вошёл или вышел, перерисовываем меню
         Facade.AuthChanged += Refresh;
     }
 
@@ -82,5 +91,3 @@
         Facade.AuthChanged -= Refresh;
     }
 }
-
-

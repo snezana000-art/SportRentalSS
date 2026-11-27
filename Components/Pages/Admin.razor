@@ -1,0 +1,231 @@
+@page "/admin"
+@inject RentalFacade Facade
+
+<PageTitle>Админ-панель</PageTitle>
+
+@if (!Facade.IsAdmin)
+{
+    <p>Эта страница только для администратора. <a href="login">Войти</a></p>
+}
+else
+{
+    <h1>Админ-панель</h1>
+
+    @if (message != "")
+    {
+        <div class="alert @(isError ? "alert-danger" : "alert-success")">@message</div>
+    }
+
+    <h2>Бронирования</h2>
+
+    @if (bookings.Count == 0)
+    {
+        <p>Броней пока нет.</p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Клиент</th>
+                    <th>Инвентарь</th>
+                    <th>Даты</th>
+                    <th>Стоимость</th>
+                    <th>Статус</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var b in bookings)
+                {
+                    <tr>
+                        <td>@b.User?.FullName</td>
+                        <td>@b.Equipment?.Name</td>
+                        <td>@b.StartDate.ToString("dd.MM.yyyy") - @b.EndDate.ToString("dd.MM.yyyy")</td>
+                        <td>@b.TotalPrice.ToString("0") ₽</td>
+                        <td>@b.Status</td>
+                        <td>
+                            @if (b.Status == BookingStatus.New)
+                            {
+                                <button class="btn btn-success btn-sm" @onclick="() => Confirm(b.Id)">Подтвердить</button>
+                            }
+                            else if (b.Status == BookingStatus.Confirmed)
+                            {
+                                <button class="btn btn-primary btn-sm" @onclick="() => Return(b.Id)">Принять возврат</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <h2>Инвентарь</h2>
+
+    <div class="border rounded p-3 mb-3" style="max-width: 500px">
+        <h5>@(editingId == 0 ? "Добавить инвентарь" : "Изменить инвентарь")</h5>
+
+        <label>Название</label>
+        <input class="form-control" type="text" @bind="name" />
+
+        <label class="mt-2">Описание</label>
+        <input class="form-control" type="text" @bind="description" />
+
+        <label class="mt-2">Цена за день, ₽</label>
+        <input class="form-control" type="number" @bind="price" />
+
+        <label class="mt-2">Категория</label>
+        <select class="form-select" @bind="categoryId">
+            @foreach (var c in categories)
+            {
+                <option value="@c.Id">@c.Name</option>
+            }
+        </select>
+
+        <button class="btn btn-success mt-3" @onclick="Save">@(editingId == 0 ? "Добавить" : "Сохранить")</button>
+        @if (editingId != 0)
+        {
+            <button class="btn btn-secondary mt-3 ms-2" @onclick="ClearForm">Отмена</button>
+        }
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Категория</th>
+                <th>Цена за день</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in items)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Category?.Name</td>
+                    <td>@item.PricePerDay.ToString("0") ₽</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" @onclick="() => Edit(item)">Изменить</button>
+                        <button class="btn btn-danger btn-sm" @onclick="() => Delete(item.Id)">Удалить</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    List<Booking> bookings = new();
+    List<Equipment> items = new();
+    List<Category> categories = new();
+
+    // поля формы инвентаря 
+    int editingId = 0;
+    string name = "";
+    string description = "";
+decimal price = 0;
+    int categoryId = 0;
+
+    string message = "";
+    bool isError = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!Facade.IsAdmin)
+        {
+            return;
+        }
+
+        await LoadAll();
+        ClearForm();
+    }
+
+    // загружает брони, инвентарь и категории
+    async Task LoadAll()
+    {
+        bookings = await Facade.GetAllBookingsAsync();
+        items = await Facade.GetEquipmentAsync(null);
+        categories = await Facade.GetCategoriesAsync();
+    }
+
+    // показывает сообщение и обновляет списки
+    async Task ShowResult(string? error, string okText)
+    {
+        if (error == null)
+        {
+            message = okText;
+            isError = false;
+        }
+        else
+        {
+            message = error;
+            isError = true;
+        }
+
+        await LoadAll();
+    }
+
+    // очищает форму инвентаря
+    void ClearForm()
+    {
+        editingId = 0;
+        name = "";
+        description = "";
+        price = 0;
+        categoryId = categories.Count > 0 ? categories[0].Id : 0;
+    }
+
+    // нажали "Подтвердить"
+    async Task Confirm(int id)
+    {
+        await ShowResult(await Facade.ConfirmBookingAsync(id), "Бронь подтверждена");
+    }
+
+    // нажали "Принять возврат"
+    async Task Return(int id)
+    {
+        await ShowResult(await Facade.ReturnBookingAsync(id), "Возврат отмечен");
+    }
+
+    // нажали "Изменить": переносим данные инвентаря в форму
+    void Edit(Equipment item)
+    {
+        editingId = item.Id;
+        name = item.Name;
+        description = item.Description;
+        price = item.PricePerDay;
+        categoryId = item.CategoryId;
+    }
+
+    // нажали "Добавить" или "Сохранить"
+    async Task Save()
+    {
+        string? error;
+        string okText;
+
+        if (editingId == 0)
+        {
+            error = await Facade.AddEquipmentAsync(name, description, price, categoryId);
+            okText = "Инвентарь добавлен";
+        }
+        else
+        {
+            error = await Facade.UpdateEquipmentAsync(editingId, name, description, price, categoryId);
+            okText = "Изменения сохранены";
+        }
+
+        if (error == null)
+        {
+            ClearForm();
+        }
+
+        await ShowResult(error, okText);
+    }
+
+    // нажали "Удалить"
+    async Task Delete(int id)
+    {
+        await ShowResult(await Facade.DeleteEquipmentAsync(id), "Инвентарь удалён");
+    }
+}
