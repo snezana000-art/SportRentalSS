@@ -2,14 +2,17 @@ using SportRental.Models;
 
 namespace SportRental.Services;
 
-// RentalFacade - "Фасад" (Facade).
-// Страницы сайта обращаются только к нему и не знают про остальные сервисы.
+/// <summary>
+/// RentalFacade - "Фасад" (Facade).
+/// Страницы сайта обращаются только к нему и не знают про остальные сервисы.
+/// </summary>
 public class RentalFacade
 {
     private readonly AuthService _auth;
     private readonly InventoryService _inventory;
     private readonly BookingService _bookings;
 
+    /// <summary>Срабатывает, когда пользователь вошёл или вышел.</summary>
     public event Action? AuthChanged;
 
     public RentalFacade(AuthService auth, InventoryService inventory, BookingService bookings)
@@ -21,6 +24,7 @@ public class RentalFacade
         _auth.Changed += () => AuthChanged?.Invoke();
     }
 
+    //  Пользователь 
     public bool IsLoggedIn => _auth.IsLoggedIn;
     public bool IsAdmin => _auth.IsAdmin;
     public string UserName => _auth.CurrentUser?.FullName ?? "";
@@ -31,14 +35,18 @@ public class RentalFacade
     public Task<string?> LoginAsync(string email, string password)
         => _auth.LoginAsync(email, password);
 
-    public void Logout() => _auth.Logout();
+    public Task LogoutAsync() => _auth.LogoutAsync();
 
+    public Task RestoreLoginAsync() => _auth.RestoreAsync();
+
+    //  Каталог 
     public Task<List<Category>> GetCategoriesAsync()
         => _inventory.GetCategoriesAsync();
 
     public Task<List<Equipment>> GetEquipmentAsync(int? categoryId)
         => _inventory.GetEquipmentAsync(categoryId);
 
+    //  Бронирование (клиент) 
     public async Task<string?> BookAsync(int equipmentId, DateTime start, DateTime end)
     {
         if (_auth.CurrentUser == null)
@@ -71,6 +79,7 @@ public class RentalFacade
         return await _bookings.UndoAsync(bookingId, _auth.CurrentUser.Id);
     }
 
+    //  Админ-панель 
     public async Task<List<Booking>> GetAllBookingsAsync()
     {
         if (!IsAdmin)
@@ -115,7 +124,6 @@ public class RentalFacade
     {
         if (!IsAdmin)
             return "Нет доступа";
-
-        return await _inventory.DeleteAsync(id);
+return await _inventory.DeleteAsync(id);
     }
 }

@@ -4,7 +4,7 @@ using SportRental.Models;
 
 namespace SportRental.Services;
 
-// Вся логика бронирования: проверка дат, создание, отмена, возврат
+/// <summary>Вся логика бронирования: проверка дат, создание, отмена, возврат, подтверждение.</summary>
 public class BookingService
 {
     private readonly IDbContextFactory<AppDbContext> _factory;
@@ -16,8 +16,10 @@ public class BookingService
         _caretaker = caretaker;
     }
 
-    // Свободен ли инвентарь на эти даты?
-    // ignoreBookingId - бронь, которую не учитываем (нужно при восстановлении брони)
+    /// <summary>
+    /// Проверяет, свободен ли инвентарь на эти даты.
+    /// ignoreBookingId - бронь, которую не учитываем (нужно при возврате отменённой брони).
+    /// </summary>
     public async Task<bool> IsAvailableAsync(int equipmentId, DateTime start, DateTime end, int ignoreBookingId = 0)
     {
         using var db = _factory.CreateDbContext();
@@ -33,7 +35,7 @@ public class BookingService
         return !busy;
     }
 
-    // Создать бронь. Возвращает текст ошибки или null.
+    /// <summary>Создаёт бронь. Возвращает текст ошибки или null.</summary>
     public async Task<string?> CreateAsync(int userId, int equipmentId, DateTime start, DateTime end)
     {
         start = start.Date;
@@ -68,6 +70,7 @@ public class BookingService
         return null;
     }
 
+    /// <summary>Возвращает брони одного клиента, новые сверху.</summary>
     public async Task<List<Booking>> GetUserBookingsAsync(int userId)
     {
         using var db = _factory.CreateDbContext();
@@ -78,6 +81,7 @@ public class BookingService
             .ToListAsync();
     }
 
+    /// <summary>Возвращает все брони (для администратора).</summary>
     public async Task<List<Booking>> GetAllAsync()
     {
         using var db = _factory.CreateDbContext();
@@ -88,7 +92,7 @@ public class BookingService
             .ToListAsync();
     }
 
-    // Отмена брони клиентом
+    /// <summary>Отменяет бронь клиента. Перед отменой сохраняет снимок (Хранитель).</summary>
     public async Task<string?> CancelAsync(int bookingId, int userId)
     {
         using var db = _factory.CreateDbContext();
@@ -105,7 +109,10 @@ public class BookingService
         return null;
     }
 
-    // Вернуть отменённую бронь (Undo)
+    /// <summary>
+    /// Возвращает отменённую бронь из снимка (Undo).
+/// Если даты за это время заняли другие, вернуть бронь нельзя.
+    /// </summary>
     public async Task<string?> UndoAsync(int bookingId, int userId)
     {
         using var db = _factory.CreateDbContext();
@@ -115,8 +122,7 @@ public class BookingService
             return "Бронь не найдена";
 
         var snapshot = _caretaker.GetLast(db, bookingId);
-        
-if (snapshot == null)
+        if (snapshot == null)
             return "Нечего возвращать";
 
         // пока бронь была отменена, эти даты мог занять кто-то другой
@@ -128,18 +134,19 @@ if (snapshot == null)
         return null;
     }
 
-    // Администратор подтверждает бронь
+    /// <summary>Администратор подтверждает новую бронь.</summary>
     public Task<string?> ConfirmAsync(int bookingId)
     {
         return ChangeStatusAsync(bookingId, BookingStatus.New, BookingStatus.Confirmed);
     }
 
-    // Администратор отмечает возврат инвентаря
+    /// <summary>Администратор отмечает возврат инвентаря.</summary>
     public Task<string?> ReturnAsync(int bookingId)
     {
         return ChangeStatusAsync(bookingId, BookingStatus.Confirmed, BookingStatus.Returned);
     }
 
+    // Меняет статус брони с from на to 
     private async Task<string?> ChangeStatusAsync(int bookingId, string from, string to)
     {
         using var db = _factory.CreateDbContext();

@@ -4,7 +4,7 @@ using SportRental.Models;
 
 namespace SportRental.Services;
 
-// Работа с каталогом инвентаря
+/// <summary>Работа с каталогом инвентаря: просмотр, добавление, изменение, удаление.</summary>
 public class InventoryService
 {
     private readonly IDbContextFactory<AppDbContext> _factory;
@@ -14,13 +14,17 @@ public class InventoryService
         _factory = factory;
     }
 
+    /// <summary>Возвращает все категории по алфавиту.</summary>
     public async Task<List<Category>> GetCategoriesAsync()
     {
         using var db = _factory.CreateDbContext();
         return await db.Categories.OrderBy(c => c.Name).ToListAsync();
     }
 
-    // categoryId = null - показать весь инвентарь
+    /// <summary>
+    /// Возвращает инвентарь для каталога.
+    /// categoryId = null - показать весь инвентарь.
+    /// </summary>
     public async Task<List<Equipment>> GetEquipmentAsync(int? categoryId)
     {
         using var db = _factory.CreateDbContext();
@@ -34,7 +38,7 @@ public class InventoryService
         return await query.OrderBy(e => e.Name).ToListAsync();
     }
 
-    // Проверка полей инвентаря. Возвращает текст ошибки или null.
+    /// <summary>Проверяет название и цену. Возвращает текст ошибки или null.</summary>
     private string? Validate(string name, decimal price)
     {
         if (name.Trim() == "")
@@ -44,6 +48,7 @@ public class InventoryService
         return null;
     }
 
+    /// <summary>Добавляет новый инвентарь. Возвращает текст ошибки или null.</summary>
     public async Task<string?> AddAsync(string name, string description, decimal price, int categoryId)
     {
         var error = Validate(name, price);
@@ -66,6 +71,7 @@ public class InventoryService
         return null;
     }
 
+    /// <summary>Изменяет данные инвентаря. Возвращает текст ошибки или null.</summary>
     public async Task<string?> UpdateAsync(int id, string name, string description, decimal price, int categoryId)
     {
         var error = Validate(name, price);
@@ -90,6 +96,10 @@ public class InventoryService
         return null;
     }
 
+    /// <summary>
+    /// Удаляет инвентарь. Нельзя удалить то, на что есть брони.
+    /// Возвращает текст ошибки или null.
+    /// </summary>
     public async Task<string?> DeleteAsync(int id)
     {
         using var db = _factory.CreateDbContext();

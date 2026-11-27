@@ -3,9 +3,13 @@ using SportRental.Models;
 
 namespace SportRental.Data;
 
-// запуск первые даныее в бд
+/// <summary>Создаёт базу и заполняет её начальными данными при первом запуске.</summary>
 public static class DbSeeder
 {
+    /// <summary>
+    /// Создаёт базу, если её нет, и добавляет категории, инвентарь
+    /// и администратора по умолчанию. Если данные уже есть, ничего не делает.
+    /// </summary>
     public static void Seed(AppDbContext db)
     {
         db.Database.EnsureCreated();

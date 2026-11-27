@@ -38,9 +38,9 @@
         InvokeAsync(StateHasChanged);
     }
 
-    private void Logout()
+    private async Task Logout()
     {
-        Facade.Logout();
+        await Facade.LogoutAsync();
         Nav.NavigateTo("/");
     }
 

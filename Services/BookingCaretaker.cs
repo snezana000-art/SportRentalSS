@@ -4,27 +4,18 @@ using SportRental.Models;
 namespace SportRental.Services;
 
 /// <summary>
-///  Сохраняет снимки броней и отдаёт их обратно,
-/// но не знает, что внутри снимка.
+/// BookingCaretaker - "Опекун" (Caretaker) в паттерне Хранитель.
+/// Не знает, что внутри снимка: только сохраняет снимки и отдаёт их обратно.
 /// </summary>
 public class BookingCaretaker
 {
-    /// <summary>
-    /// Сохраняет снимок брони. Вызывается ДО изменения брони.
-    /// </summary>
-    /// <param name="db">Подключение к базе данных, в котором идёт работа.</param>
-    /// <param name="booking">Бронь, состояние которой нужно запомнить.</param>
+    /// <summary>Сохраняет снимок брони. Вызывается ДО изменения брони.</summary>
     public void Save(AppDbContext db, Booking booking)
     {
         db.BookingSnapshots.Add(booking.CreateSnapshot());
     }
 
-    /// <summary>
-    /// Возвращает последний снимок брони.
-    /// </summary>
-    /// <param name="db">Подключение к базе данных.</param>
-    /// <param name="bookingId">Номер брони.</param>
-    /// <returns>Последний снимок или null, если снимков нет.</returns>
+    /// <summary>Возвращает последний снимок брони или null, если снимков нет.</summary>
     public BookingSnapshot? GetLast(AppDbContext db, int bookingId)
     {
         return db.BookingSnapshots
@@ -33,12 +24,7 @@ public class BookingCaretaker
             .FirstOrDefault();
     }
 
-    /// <summary>
-    /// Возвращает бронь в сохранённое состояние и удаляет использованный снимок.
-    /// </summary>
-    /// <param name="db">Подключение к базе данных.</param>
-    /// <param name="booking">Бронь, которую нужно восстановить.</param>
-    /// <param name="snapshot">Снимок, из которого восстанавливаем.</param>
+    /// <summary>Возвращает бронь в состояние из снимка и удаляет использованный снимок.</summary>
     public void Undo(AppDbContext db, Booking booking, BookingSnapshot snapshot)
     {
         booking.Restore(snapshot);
