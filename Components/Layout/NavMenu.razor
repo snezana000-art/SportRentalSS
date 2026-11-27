@@ -2,72 +2,30 @@
 @inject RentalFacade Facade
 @inject NavigationManager Nav
 
-<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Прокат спорта</a>
-    </div>
-</div>
+<nav class="menu">
+    <NavLink href="" Match="NavLinkMatch.All">Главная</NavLink>
+    <NavLink href="catalog">Каталог</NavLink>
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+    @if (Facade.IsLoggedIn)
+    {
+        <NavLink href="cabinet">Личный кабинет</NavLink>
 
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                Главная
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="catalog">
-                Каталог
-            </NavLink>
-        </div>
-
-        @if (Facade.IsLoggedIn)
+        @if (Facade.IsAdmin)
         {
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="cabinet">
-                    Личный кабинет
-                </NavLink>
-            </div>
-
-            @if (Facade.IsAdmin)
-            {
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="admin">
-                        Админ-панель
-                    </NavLink>
-                </div>
-            }
-
-            <div class="nav-item px-3">
-                <span class="nav-link">@Facade.UserName</span>
-            </div>
-            <div class="nav-item px-3">
-                <button class="nav-link" @onclick="Logout">Выйти</button>
-            </div>
-        }
-        else
-        {
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="login">
-                    Вход
-                </NavLink>
-            </div>
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="register">
-                    Регистрация
-                </NavLink>
-            </div>
+            <NavLink href="admin">Админ-панель</NavLink>
         }
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="about">
-                О проекте
-            </NavLink>
-        </div>
-    </nav>
-</div>
+        <span class="user-name">@Facade.UserName</span>
+        <button class="button button-orange button-small" @onclick="Logout">Выйти</button>
+    }
+    else
+    {
+        <NavLink href="login">Вход</NavLink>
+        <NavLink href="register">Регистрация</NavLink>
+    }
+
+    <NavLink href="about">О проекте</NavLink>
+</nav>
 
 @code {
     protected override void OnInitialized()
@@ -83,7 +41,7 @@
     private void Logout()
     {
         Facade.Logout();
-        Nav.NavigateTo("");
+        Nav.NavigateTo("/");
     }
 
     public void Dispose()

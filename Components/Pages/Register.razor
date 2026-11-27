@@ -4,27 +4,29 @@
 
 <PageTitle>Регистрация</PageTitle>
 
-<h1>Регистрация</h1>
+<div class="form-box">
+    <h1>Регистрация</h1>
 
-<div style="max-width: 400px">
     @if (error != "")
     {
-        <div class="alert alert-danger">@error</div>
+        <div class="message message-error">@error</div>
     }
 
     <label>Имя</label>
-    <input class="form-control" type="text" @bind="name" @bind:event="oninput" />
+    <input class="field" type="text" @bind="name" @bind:event="oninput" />
 
-    <label class="mt-2">Email</label>
-    <input class="form-control" type="email" @bind="email" @bind:event="oninput" />
+    <label>Email</label>
+    <input class="field" type="email" @bind="email" @bind:event="oninput" />
 
-    <label class="mt-2">Пароль (не короче 6 символов)</label>
-    <input class="form-control" type="password" @bind="password" @bind:event="oninput" />
+    <label>Пароль (не короче 6 символов)</label>
+    <input class="field" type="password" @bind="password" @bind:event="oninput" />
 
-    <label class="mt-2">Повторите пароль</label>
-    <input class="form-control" type="password" @bind="password2" @bind:event="oninput" />
+    <label>Повторите пароль</label>
+    <input class="field" type="password" @bind="password2" @bind:event="oninput" />
 
-    <button class="btn btn-primary mt-3" @onclick="DoRegister">Создать аккаунт</button>
+    <button class="button button-olive" @onclick="DoRegister">Создать аккаунт</button>
+
+    <p class="small">Уже есть аккаунт? <a href="login">Войти</a></p>
 </div>
 
 @code {
@@ -36,8 +38,6 @@
 
     async Task DoRegister()
     {
-        error = "";
-
         if (password != password2)
         {
             error = "Пароли не совпадают";

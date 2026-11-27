@@ -14,7 +14,7 @@ else
 
     @if (message != "")
     {
-        <div class="alert @(isError ? "alert-danger" : "alert-success")">@message</div>
+        <div class="message @(isError ? "message-error" : "message-ok")">@message</div>
     }
 
     <h2>Текущие брони</h2>
@@ -25,29 +25,31 @@ else
     }
     else
     {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Инвентарь</th>
-                    <th>Даты</th>
-                    <th>Стоимость</th>
-                    <th>Статус</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var b in current)
-                {
+        <div class="table-wrap">
+            <table class="table-main">
+                <thead>
                     <tr>
-                        <td>@b.Equipment?.Name</td>
-                        <td>@b.StartDate.ToString("dd.MM.yyyy") - @b.EndDate.ToString("dd.MM.yyyy")</td>
-                        <td>@b.TotalPrice.ToString("0") ₽</td>
-                        <td>@b.Status</td>
-                        <td><button class="btn btn-danger btn-sm" @onclick="() => Cancel(b.Id)">Отменить</button></td>
+                        <th>Инвентарь</th>
+                        <th>Даты</th>
+                        <th>Стоимость</th>
+                        <th>Статус</th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var b in current)
+                    {
+                        <tr>
+                            <td>@b.Equipment?.Name</td>
+                            <td>@b.StartDate.ToString("dd.MM.yyyy") - @b.EndDate.ToString("dd.MM.yyyy")</td>
+                            <td>@b.TotalPrice.ToString("0") ₽</td>
+                            <td><span class="badge @StatusClass(b.Status)">@b.Status</span></td>
+                            <td><button class="button button-rose button-small" @onclick="() => Cancel(b.Id)">Отменить</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     }
 
     <h2>Прошлые брони</h2>
@@ -58,34 +60,36 @@ else
     }
     else
     {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Инвентарь</th>
-                    <th>Даты</th>
-                    <th>Стоимость</th>
-                    <th>Статус</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var b in past)
-                {
+        <div class="table-wrap">
+            <table class="table-main">
+                <thead>
                     <tr>
-                        <td>@b.Equipment?.Name</td>
-                        <td>@b.StartDate.ToString("dd.MM.yyyy") - @b.EndDate.ToString("dd.MM.yyyy")</td>
-                        <td>@b.TotalPrice.ToString("0") ₽</td>
-                        <td>@b.Status</td>
-                        <td>
-                            @if (b.Status == BookingStatus.Cancelled)
-                            {
-                                <button class="btn btn-success btn-sm" @onclick="() => Undo(b.Id)">Вернуть бронь</button>
-                            }
-                        </td>
+                        <th>Инвентарь</th>
+                        <th>Даты</th>
+                        <th>Стоимость</th>
+                        <th>Статус</th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var b in past)
+                    {
+                        <tr>
+                            <td>@b.Equipment?.Name</td>
+                            <td>@b.StartDate.ToString("dd.MM.yyyy") - @b.EndDate.ToString("dd.MM.yyyy")</td>
+                            <td>@b.TotalPrice.ToString("0") ₽</td>
+                            <td><span class="badge @StatusClass(b.Status)">@b.Status</span></td>
+                            <td>
+                                @if (b.Status == "Отменена")
+                                {
+                                    <button class="button button-olive button-small" @onclick="() => Undo(b.Id)">Вернуть бронь</button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     }
 }
 
@@ -104,8 +108,8 @@ else
     {
         var all = await Facade.GetMyBookingsAsync();
 
-        current = all.Where(b => b.Status == BookingStatus.New || b.Status == BookingStatus.Confirmed).ToList();
-        past = all.Where(b => b.Status == BookingStatus.Returned || b.Status == BookingStatus.Cancelled).ToList();
+        current = all.Where(b => b.Status == "Новая" || b.Status == "Подтверждена").ToList();
+        past = all.Where(b => b.Status == "Возвращена" || b.Status == "Отменена").ToList();
     }
 
     async Task Cancel(int id)
@@ -124,7 +128,7 @@ else
 
     void ShowResult(string? error, string okText)
     {
-        if (error == null)
+if (error == null)
         {
             message = okText;
             isError = false;
@@ -135,4 +139,14 @@ else
             isError = true;
         }
     }
+
+    string StatusClass(string status)
+    {
+        if (status == "Новая") return "badge-new";
+        if (status == "Подтверждена") return "badge-ok";
+        if (status == "Возвращена") return "badge-done";
+        return "badge-cancel";
+    }
 }
+
+

@@ -1,24 +1,26 @@
 @page "/login"
-@inject AuthService Auth
+@inject RentalFacade Facade
 @inject NavigationManager Nav
 
 <PageTitle>Вход</PageTitle>
 
-<h1>Вход</h1>
+<div class="form-box">
+    <h1>Вход</h1>
 
-<div style="max-width: 400px">
     @if (error != "")
     {
-        <div class="alert alert-danger">@error</div>
+        <div class="message message-error">@error</div>
     }
 
     <label>Email</label>
-    <input class="form-control" type="email" @bind="email" @bind:event="oninput" />
+    <input class="field" type="email" @bind="email" @bind:event="oninput" />
 
-    <label class="mt-2">Пароль</label>
-    <input class="form-control" type="password" @bind="password" @bind:event="oninput" @onkeydown="OnKeyDown" />
+    <label>Пароль</label>
+    <input class="field" type="password" @bind="password" @bind:event="oninput" @onkeydown="OnKeyDown" />
 
-    <button class="btn btn-primary mt-3" @onclick="DoLogin">Войти</button>
+    <button class="button button-olive" @onclick="DoLogin">Войти</button>
+
+    <p class="small">Нет аккаунта? <a href="register">Зарегистрируйтесь</a></p>
 </div>
 
 @code {
@@ -28,13 +30,10 @@
 
     async Task DoLogin()
     {
-        error = "";
-
-        var result = await Auth.LoginAsync(email, password);
+        var result = await Facade.LoginAsync(email, password);
 
         if (result == null)
         {
-            // вход выполнен, переходим на главную страницу
             Nav.NavigateTo("/");
         }
         else
